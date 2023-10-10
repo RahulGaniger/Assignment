@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <style>
+
+        body {
+            margin: 0 px;
+            padding: 0 px; 
+            font-family: Arial, sans-serif;
+        }
+
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: rgb(188, 194, 200);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Survey Form</h2>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" required>
+                    <option value="India">India</option>
+                    <option value="UK">UK</option>
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession:</label>
+                <input type="text" id="profession" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" required>
+            </div>
+            <div class="form-group">
+                <button type="button" id="submitBtn">Submit</button>
+                <button type="button" id="resetBtn">Reset</button>
+            </div>
+        </form>
+    </div>
+    <div class="popup" id="popup">
+        <h3>Survey Form Submission</h3>
+        <div id="popupContent"></div>
+        <button type="button" id="closePopup">Close</button>
+    </div>
+
+     <script>
+        const form = document.getElementById("surveyForm");
+        const popup = document.getElementById("popup");
+        const popupContent = document.getElementById("popupContent");
+        const closePopupBtn = document.getElementById("closePopup");
+
+        document.getElementById("submitBtn").addEventListener("click", function () {
+            // Validate the form
+            if (form.checkValidity()) {
+                // Display the submitted data in the popup
+                popupContent.innerHTML = "<h4>Submitted Data:</h4>";
+                const formData = new FormData(form);
+                for (const [key, value] of formData.entries()) {
+                    popupContent.innerHTML += `<p><strong>${key}:</strong> ${value}</p>`;
+                }
+                popup.style.display = "block";
+
+                // Reset the form
+                form.reset();
+            } else {
+                alert("Please fill in all required fields.");
+            }
+        });
+
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            form.reset();
+        });
+
+        closePopupBtn.addEventListener("click", function () {
+            popup.style.display = "none";
+        });
+    </script>
+</body>
+</html>
