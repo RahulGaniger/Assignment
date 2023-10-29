@@ -5,13 +5,13 @@ function reverseWords(sentence)
 
    //iterate through words and reverseeach one
 
-   const reverse = words.map(word =>{
-    return word.split('').reverse().join('');
-   });
+  for (let index = 0; index < words.length; index++)
+   {
+    words[index] = words[index].split("").reverse().join("");  
+   }
 
    //join the reversed words back into a sentence
-
-   const reversedSentence = reverse.join(' ');
+   const reversedSentence = words.join(' ');
    return reversedSentence;
 }
 
@@ -19,4 +19,6 @@ const sentence = "my name is rahul";
 console.log(sentence);
 const reversedResult = reverseWords(sentence);
 console.log(reversedResult);
+
+
 
